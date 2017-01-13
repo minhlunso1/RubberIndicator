@@ -12,6 +12,7 @@ public class MainActivity extends FragmentActivity {
 	private RubberIndicator mRubberIndicator;
 	private int previousPosition;
     PagerContainer pagerContainer;
+	private int totalPage=4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,12 @@ public class MainActivity extends FragmentActivity {
         pagerContainer = (PagerContainer) findViewById(R.id.pager_container);
         vpImages = pagerContainer.getViewPager();
 
-		mRubberIndicator.setCount(3, 0);
+		mRubberIndicator.setCount(totalPage, 0);
 
-		MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+		MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), totalPage);
 
         vpImages.setAdapter(adapter);
-        vpImages.setOffscreenPageLimit(adapter.getCount());
+        vpImages.setOffscreenPageLimit(2);
         vpImages.setPageMargin(120);
         vpImages.setClipChildren(false);
 
