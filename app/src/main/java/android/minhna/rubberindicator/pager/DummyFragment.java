@@ -1,8 +1,10 @@
 package android.minhna.rubberindicator.pager;
 
+import android.minhna.rubberindicator.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,16 @@ public class DummyFragment extends Fragment {
 		textView.setText("Page " + (pos+1));
 		textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
 		textView.setTextSize(32.0f);
-		return textView;
+
+		View v = new View(getActivity());
+		v.setLayoutParams(new ViewPager.LayoutParams());
+		if (pos==0)
+			v.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+		else if (pos==1)
+			v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+		else
+			v.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+		return v;
 		
 //		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 //		params.setMargins(0, 20, 0, 0);

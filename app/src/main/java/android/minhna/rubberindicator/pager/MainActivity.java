@@ -11,6 +11,7 @@ public class MainActivity extends FragmentActivity {
 	ViewPager vpImages;
 	private RubberIndicator mRubberIndicator;
 	private int previousPosition;
+    PagerContainer pagerContainer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,17 +19,19 @@ public class MainActivity extends FragmentActivity {
 		previousPosition=0;
 		setContentView(R.layout.activity_main_pager);
 
-		vpImages = (ViewPager) findViewById(R.id.vpImages);
+//		vpImages = (ViewPager) findViewById(R.id.vpImages);
 		mRubberIndicator = (RubberIndicator) findViewById(R.id.rubber);
+        pagerContainer = (PagerContainer) findViewById(R.id.pager_container);
+        vpImages = pagerContainer.getViewPager();
 
 		mRubberIndicator.setCount(3, 0);
 
 		MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-		
-		vpImages.setAdapter(adapter);
-		
-		vpImages.setCurrentItem(0);
-		vpImages.setOffscreenPageLimit(0);//run number of off screen, at least 1 so 0 will implicitly change to 1
+
+        vpImages.setAdapter(adapter);
+        vpImages.setOffscreenPageLimit(adapter.getCount());
+        vpImages.setPageMargin(120);
+        vpImages.setClipChildren(false);
 
 		vpImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
